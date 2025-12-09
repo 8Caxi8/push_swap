@@ -6,7 +6,7 @@
 /*   By: dansimoe <dansimoe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 13:37:26 by dansimoe          #+#    #+#             */
-/*   Updated: 2025/12/08 23:56:52 by dansimoe         ###   ########.fr       */
+/*   Updated: 2025/12/09 13:21:58 by dansimoe         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -25,5 +25,9 @@ t_list	*reverse_rotate(t_list **lst);
 void	lstprint(t_list *stack_a,t_list *stack_b);
 void	start_algorithm(t_list **stack_a, t_list **stack_b);
 int		is_ascending(t_list *stack_a);
+void	push_to_b(t_list **stack_a, t_list **stack_b);
+void	push_to_a(t_list **stack_a, t_list **stack_b);
+void	push_efficiently(t_list **stack_a, t_list **stack_b, int n[2]);
+void	order_stack(t_list **stack_a);
 
 #endif

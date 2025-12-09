@@ -1,6 +1,6 @@
 NAME = push_swap
 
-SRCS =	push_swap.c push_swap_helper.c operations.c
+SRCS =	push_swap.c push_swap_helper.c operations.c push_functions.c
 		
 BONUS =	
 

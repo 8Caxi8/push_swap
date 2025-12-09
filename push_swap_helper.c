@@ -6,7 +6,7 @@
 /*   By: dansimoe <dansimoe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 21:24:04 by dansimoe          #+#    #+#             */
-/*   Updated: 2025/12/09 04:40:10 by dansimoe         ###   ########.fr       */
+/*   Updated: 2025/12/09 14:02:23 by dansimoe         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -41,89 +41,35 @@ void	sort_3(t_list **stack_a)
 		return ((void) write(1, "rra\n", 4));
 }
 
-void	start_algorithm(t_list **stack_a, t_list **stack_b)
+void	order_stack(t_list **stack_a)
 {
 	int	n;
-	int	i;
-	int	diff;
-	int	minimun;
-	
+
+	n = 0;
+	while (is_ascending(*stack_a) != ft_lstsize(*stack_a) - 1)
+	{
+		rotate(stack_a);
+		n++;
+	}
+	if (n <= ft_lstsize(*stack_a) / 2)
+		while (n-- > 0)
+			(write(1, "ra\n", 3));
+	else
+		while (n++ <= ft_lstsize(*stack_a) - 1)
+			(write(1, "rra\n", 4));
+}
+
+void	start_algorithm(t_list **stack_a, t_list **stack_b)
+{
 	while (ft_lstsize(*stack_a) > 3)
-	{
-		while (ft_lstsize(*stack_b) < 2 && ft_lstsize(*stack_a) > 3)
-			(write(1, "pb\n", 3), push(stack_b, stack_a));
-	}
-	ft_printf("\n------STEP 1--------\n");
-	lstprint(*stack_a, *stack_b);
+		push_to_b(stack_a, stack_b);
+	/* ft_printf("------STEP 1--------\n");
+	lstprint(*stack_a, *stack_b); */
 	sort_3(stack_a);
-	ft_printf("\n------STEP 2--------\n");
-	lstprint(*stack_a, *stack_b);
+	/* ft_printf("------STEP 2--------\n");
+	lstprint(*stack_a, *stack_b); */
 	while (ft_lstsize(*stack_b) > 0)
-	{
-		i = -1;
-		n = 0;
-		minimun = INT_MAX;
-		while (++i < ft_lstsize(*stack_a))
-		{
-			diff = *(int *)(*stack_a)->content - *(int *)(*stack_b)->content;
-			if (diff < minimun && diff > 0)
-			{
-				minimun = *(int *)(*stack_a)->content - *(int *)(*stack_b)->content;
-				n = i;
-			}
-			rotate(stack_a);
-		}
-		if (n == 0 && minimun == INT_MAX)
-		{
-			if (is_ascending(*stack_a) != ft_lstsize(*stack_a) - 1)
-			{
-				n = 0;
-				while (is_ascending(*stack_a) != ft_lstsize(*stack_a) - 1)
-				{
-					rotate(stack_a);
-					n++;
-				}
-				if (n <= ft_lstsize(*stack_a) / 2)
-					while (n-- > 0)
-						(write(1, "ra\n", 3));
-				else
-					while (n++ <= ft_lstsize(*stack_a) - 1)
-						(write(1, "rra\n", 4));
-			}
-			(write(1, "pa\n", 3), push(stack_a, stack_b));
-		}
-		else if (n <= ft_lstsize(*stack_a) / 2)
-		{
-			while (n-- > 0)
-				(rotate(stack_a), write(1, "ra\n", 3));
-			(write(1, "pa\n", 3), push(stack_a, stack_b));
-		}
-		else if (n < ft_lstsize(*stack_a))
-		{
-			while (n++ < ft_lstsize(*stack_a))
-				(reverse_rotate(stack_a), write(1, "rra\n", 4));
-			(write(1, "pa\n", 3), push(stack_a, stack_b));
-		}
-		/* else
-		{
-			reverse_rotate(stack_a);
-			(write(1, "pa\n", 3), push(stack_a, stack_b));
-			(write(1, "ra\n", 3), rotate(stack_a));
-		} */
-	}
+		push_to_a(stack_a, stack_b);
 	if (is_ascending(*stack_a) != ft_lstsize(*stack_a) - 1)
-	{
-		n = 0;
-		while (is_ascending(*stack_a) != ft_lstsize(*stack_a) - 1)
-		{
-			rotate(stack_a);
-			n++;
-		}
-		if (n <= ft_lstsize(*stack_a) / 2)
-			while (n-- > 0)
-				(write(1, "ra\n", 3));
-		else
-			while (n++ <= ft_lstsize(*stack_a) - 1)
-				(write(1, "rra\n", 4));
-	}
+		order_stack(stack_a);
 }

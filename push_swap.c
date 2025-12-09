@@ -6,7 +6,7 @@
 /*   By: dansimoe <dansimoe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 13:27:14 by dansimoe          #+#    #+#             */
-/*   Updated: 2025/12/09 04:40:05 by dansimoe         ###   ########.fr       */
+/*   Updated: 2025/12/09 14:02:16 by dansimoe         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -91,13 +91,14 @@ int main(int ac, char **av)
 			free(str[i]);
 		free(str);
 		stack_b = NULL;
-		/* ft_printf("\n------STEP 0--------\n");
-		lstprint(stack_a, stack_b); */
+		ft_printf("-----STEP 0--------\n");
+		lstprint(stack_a, stack_b);
 		if (is_ascending(stack_a) != ft_lstsize(stack_a) - 1)
 			start_algorithm(&stack_a, &stack_b);
-		ft_printf("\n------STEP FINAL--------\n");
+		ft_printf("------STEP FINAL--------\n");
 		lstprint(stack_a, stack_b);
 		clear(stack_a, stack_b, n);
+		//ARG="51 1 50 0 -7"; ./push_swap $ARG  
 	}
 	else if (ac > 2)
 	{	
