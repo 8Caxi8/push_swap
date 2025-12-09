@@ -1,6 +1,6 @@
 NAME = push_swap
 
-SRCS =	push_swap.c operations.c
+SRCS =	push_swap.c push_swap_helper.c operations.c
 		
 BONUS =	
 
@@ -21,7 +21,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJS) libft.a
+$(NAME): $(OBJS) libft/libft.a 
 	$(CC) $(CFLAGS) $(OBJS) libft/libft.a -o $@
 
 libft.a:

@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: dansimoe <dansimoe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 13:27:14 by dansimoe          #+#    #+#             */
-/*   Updated: 2025/12/08 17:24:16 by dansimoe         ###   ########.fr       */
+/*   Updated: 2025/12/09 00:29:13 by dansimoe         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "push_swap.h"
 #include <stdio.h>
@@ -47,13 +47,26 @@ t_list	*get_stack(char **av, long **n)
 	return(stack_a);
 }
 
-void	ft_lstprint(t_list	*lst)
+void	lstprint(t_list	*stack_a, t_list	*stack_b)
 {
-	while(lst)
+	if (!stack_a)
+		return ;
+	ft_printf("a:");
+	while(stack_a)
 	{
-		ft_printf("%d\n", *(int *)lst->content);
-		lst = lst->next;
+		ft_printf("%d - > ", *(int *)stack_a->content);
+		stack_a = stack_a->next;
 	}
+	ft_printf("NULL\n");
+	if (!stack_b)
+		return ;
+	ft_printf("b:");
+	while(stack_b)
+	{
+		ft_printf("%d - > ", *(int *)stack_b->content);
+		stack_b = stack_b->next;
+	}
+	ft_printf("NULL\n");
 }
 
 int main(int ac, char **av)
@@ -67,8 +80,12 @@ int main(int ac, char **av)
 		n = malloc((ac - 1) * sizeof(long *));
 		stack_a = get_stack(av, n);
 		stack_b = NULL;
-		ft_swap(&stack_a);
-		ft_lstprint(stack_a);
+		ft_printf("\n------STEP 0--------\n");
+		lstprint(stack_a, stack_b);
+		if (is_ascending(stack_a) != ft_lstsize(stack_a) - 1)
+			start_algorithm(&stack_a, &stack_b);
+		ft_printf("\n------STEP FINAL--------\n");
+		lstprint(stack_a, stack_b);
 		clear(stack_a, stack_b, n);
 	}
 	return (0);
