@@ -24,7 +24,7 @@ all: $(NAME)
 $(NAME): $(OBJS) libft/libft.a 
 	$(CC) $(CFLAGS) $(OBJS) libft/libft.a -o $@
 
-libft.a:
+libft/libft.a:
 	$(MAKE) -C libft libft.a
 
 bonus: all

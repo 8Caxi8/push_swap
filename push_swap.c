@@ -6,7 +6,7 @@
 /*   By: dansimoe <dansimoe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 13:27:14 by dansimoe          #+#    #+#             */
-/*   Updated: 2025/12/09 00:29:13 by dansimoe         ###   ########.fr       */
+/*   Updated: 2025/12/09 04:40:05 by dansimoe         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -21,28 +21,28 @@ void	clear(t_list *stack_a, t_list *stack_b, long **n)
 	free(n);
 }
 
-t_list	*get_stack(char **av, long **n)
+t_list	*get_stack(char **tab, long **n)
 {
 	int		i;
 	int		j;
 	t_list	*stack_a;
 	
-	i = 0;
+	i = -1;
 	stack_a = NULL;
-	while(av[++i])
+	while(tab[++i])
 	{
 		j = 0;
-		while(ft_isdigit(av[i][j]) || av[i][j] == '-' || av[i][j] == '+')
+		while(ft_isdigit(tab[i][j]) || tab[i][j] == '-' || tab[i][j] == '+')
 		j++;
-		n[i - 1] = malloc(sizeof(long));
-		*n[i - 1] = ft_atoi(av[i]);
-		if (av[i][j] != 0 || ft_lstfind(stack_a, n[i - 1]) || 
-			*n[i - 1] > INT_MAX || *n[i - 1] < INT_MIN)
+		n[i] = malloc(sizeof(long));
+		*n[i] = ft_atoi(tab[i]);
+		if (tab[i][j] != 0 || ft_lstfind(stack_a, n[i]) || 
+			*n[i] > INT_MAX || *n[i] < INT_MIN)
 		{
 			write(2, "Error\n", 6);
-			(free(n[i - 1]), clear(stack_a, NULL, n), exit(1));
+			(free(n[i]), clear(stack_a, NULL, n), exit(1));
 		}
-		ft_lstadd_back(&stack_a, ft_lstnew(n[i - 1]));
+		ft_lstadd_back(&stack_a, ft_lstnew(n[i]));
 	}
 	return(stack_a);
 }
@@ -71,14 +71,38 @@ void	lstprint(t_list	*stack_a, t_list	*stack_b)
 
 int main(int ac, char **av)
 {
-	t_list *stack_a;
-	t_list *stack_b;
-	long **n;
-	
-	if (ac > 2)
+	t_list	*stack_a;
+	t_list	*stack_b;
+	int		i;
+	char	**str;
+	long	**n;
+
+	if (ac == 2)
 	{
+		str = ft_split(av[1], ' ');
+		i = -1;
+		ac = 0;
+		while (str[++i])
+			ac++;
+		n = malloc(ac * sizeof(long *));
+		stack_a = get_stack(str, n);
+		i = -1;
+		while (str[++i])
+			free(str[i]);
+		free(str);
+		stack_b = NULL;
+		/* ft_printf("\n------STEP 0--------\n");
+		lstprint(stack_a, stack_b); */
+		if (is_ascending(stack_a) != ft_lstsize(stack_a) - 1)
+			start_algorithm(&stack_a, &stack_b);
+		ft_printf("\n------STEP FINAL--------\n");
+		lstprint(stack_a, stack_b);
+		clear(stack_a, stack_b, n);
+	}
+	else if (ac > 2)
+	{	
 		n = malloc((ac - 1) * sizeof(long *));
-		stack_a = get_stack(av, n);
+		stack_a = get_stack(av + 1, n);
 		stack_b = NULL;
 		ft_printf("\n------STEP 0--------\n");
 		lstprint(stack_a, stack_b);
