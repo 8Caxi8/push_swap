@@ -6,7 +6,7 @@
 /*   By: dansimoe <dansimoe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 13:27:14 by dansimoe          #+#    #+#             */
-/*   Updated: 2025/12/09 14:02:16 by dansimoe         ###   ########.fr       */
+/*   Updated: 2025/12/10 12:33:17 by dansimoe         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -91,27 +91,26 @@ int main(int ac, char **av)
 			free(str[i]);
 		free(str);
 		stack_b = NULL;
-		ft_printf("-----STEP 0--------\n");
-		lstprint(stack_a, stack_b);
+		/* ft_printf("-----STEP 0--------\n");
+		lstprint(stack_a, stack_b); */
 		if (is_ascending(stack_a) != ft_lstsize(stack_a) - 1)
 			start_algorithm(&stack_a, &stack_b);
-		ft_printf("------STEP FINAL--------\n");
-		lstprint(stack_a, stack_b);
+		/* ft_printf("------STEP FINAL--------\n");
+		lstprint(stack_a, stack_b); */
 		clear(stack_a, stack_b, n);
-		//ARG="51 1 50 0 -7"; ./push_swap $ARG  
 	}
 	else if (ac > 2)
 	{	
 		n = malloc((ac - 1) * sizeof(long *));
 		stack_a = get_stack(av + 1, n);
 		stack_b = NULL;
-		ft_printf("\n------STEP 0--------\n");
-		lstprint(stack_a, stack_b);
+		/* ft_printf("\n------STEP 0--------\n");
+		lstprint(stack_a, stack_b); */
 		if (is_ascending(stack_a) != ft_lstsize(stack_a) - 1)
 			start_algorithm(&stack_a, &stack_b);
-		ft_printf("\n------STEP FINAL--------\n");
-		lstprint(stack_a, stack_b);
+		/* ft_printf("\n------STEP FINAL--------\n");
+		lstprint(stack_a, stack_b); */
 		clear(stack_a, stack_b, n);
 	}
 	return (0);
-}
+}//33 77 14 87 85 41 25 43 35 16 93 45 68 51 30 89 65 81 10 31 44 53 79 76 74 40 49 9 5 71 3 42 78 90 96 70 32 26 19 46 22 92 52 2 34 21 80 6 37 8 62 29 55 82 11 28 4 36 72 1 75 23 97 61 64 60 38 47 66 56 94 17 59 91 58 48 73 69 18 7 84 50 95 13 15 24 27 98 63 12 67 83 39 100 99 86 57 20 54 88

@@ -6,7 +6,7 @@
 /*   By: dansimoe <dansimoe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 16:55:01 by dansimoe          #+#    #+#             */
-/*   Updated: 2025/12/09 02:23:20 by dansimoe         ###   ########.fr       */
+/*   Updated: 2025/12/09 19:21:40 by dansimoe         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -69,4 +69,32 @@ t_list	*reverse_rotate(t_list **lst)
 	tmp->next = *lst;
 	*lst = tmp;
 	return (*lst);
+}
+
+int	node_is_max(t_list *node,t_list *stack)
+{
+	if (!stack)
+		return (1);
+	
+	while (stack)
+	{
+		if ((*(int *)(node->content)) < (*(int *)(stack->content)))
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+int	node_is_min(t_list *node,t_list *stack)
+{
+	if (!stack)
+		return (1);
+	
+	while (stack)
+	{
+		if ((*(int *)(node->content)) > (*(int *)(stack->content)))
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: dansimoe <dansimoe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 21:24:04 by dansimoe          #+#    #+#             */
-/*   Updated: 2025/12/09 14:02:23 by dansimoe         ###   ########.fr       */
+/*   Updated: 2025/12/09 21:47:08 by dansimoe         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -72,4 +72,24 @@ void	start_algorithm(t_list **stack_a, t_list **stack_b)
 		push_to_a(stack_a, stack_b);
 	if (is_ascending(*stack_a) != ft_lstsize(*stack_a) - 1)
 		order_stack(stack_a);
+}
+
+int	best_friend(t_list *node,t_list *stack)
+{
+	int	diff;
+	
+	if(!stack)
+		return (1);
+	diff = (*(int *)node->content - *(int *)stack->content);
+	if (diff < 0)
+		return (0);
+	stack = stack->next;
+	while (stack)
+	{
+		if (diff > ((*(int *)node->content - *(int *)stack->content)) && 
+			0 < (*(int *)node->content - *(int *)stack->content))
+			return (0);
+		stack=stack->next;
+	}
+	return (1);
 }
