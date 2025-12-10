@@ -1,4 +1,4 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -6,9 +6,9 @@
 #    By: dansimoe <dansimoe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 13:17:50 by dansimoe          #+#    #+#              #
-#    Updated: 2025/12/09 16:58:40 by dansimoe         ###   ########.fr        #
+#    Updated: 2025/12/10 16:42:30 by dansimoe         ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
 NAME = libft.a
 
@@ -30,7 +30,8 @@ SRCS_MEM = mem/ft_memset.c mem/ft_bzero.c mem/ft_memcpy.c mem/ft_memmove.c \
 
 #CHAR functions#
 SRCS_NUMBER = number/ft_atoi.c number/ft_itoa.c number/ft_check_base.c \
-			number/ft_putnbr_base.c number/ft_imax.c number/ft_imin.c
+			number/ft_putnbr_base.c number/ft_imax.c number/ft_imin.c \
+			number/ft_abs.c
 
 #CHAR functions#
 SRCS_STRING = string/ft_strlcpy.c string/ft_strlcat.c string/ft_strchr.c \

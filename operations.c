@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: dansimoe <dansimoe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 16:55:01 by dansimoe          #+#    #+#             */
-/*   Updated: 2025/12/09 19:21:40 by dansimoe         ###   ########.fr       */
+/*   Updated: 2025/12/10 18:47:16 by dansimoe         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -75,7 +75,6 @@ int	node_is_max(t_list *node,t_list *stack)
 {
 	if (!stack)
 		return (1);
-	
 	while (stack)
 	{
 		if ((*(int *)(node->content)) < (*(int *)(stack->content)))
@@ -89,7 +88,6 @@ int	node_is_min(t_list *node,t_list *stack)
 {
 	if (!stack)
 		return (1);
-	
 	while (stack)
 	{
 		if ((*(int *)(node->content)) > (*(int *)(stack->content)))

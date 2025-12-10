@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   push_functions.c                                   :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: dansimoe <dansimoe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 13:13:45 by dansimoe          #+#    #+#             */
-/*   Updated: 2025/12/10 12:30:41 by dansimoe         ###   ########.fr       */
+/*   Updated: 2025/12/10 19:33:29 by dansimoe         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -47,8 +47,8 @@ void	push_to_b(t_list **stack_a, t_list **stack_b)
 			{
 				/* ft_printf(".STEP %d - %d.\n", *(int *)(*stack_a)->content, *(int *)(*stack_b)->content);
 				lstprint(*stack_a, *stack_b); */ 
-				//ft_printf("<%d, %d, bff:%d>\n", n[1], n[0], best_friend(*stack_a, *stack_b));
-				if (best_friend(*stack_a, *stack_b))// || node_is_min(*stack_a, *stack_b) || node_is_min(*stack_a, *stack_b))
+				//ft_printf("<%d, %d, bff:%d>\n", n[1], n[0], best_friend_to_b(*stack_a, *stack_b));
+				if (best_friend_to_b(*stack_a, *stack_b))// || node_is_min(*stack_a, *stack_b) || node_is_min(*stack_a, *stack_b))
 				{
 					//ft_printf("<<<%d, %d --Z %d, %d>>>\n", n[0], n[1], i[0], i[1]);
 					if (ft_imin(ft_imin(ft_imin(ft_imax(i[0], i[1]),i[0] + b_size - i[1]), a_size - i[0] + i[1]), ft_imax(a_size - i[0], b_size - i[1])) < best_cost)
@@ -110,6 +110,7 @@ void	push_to_b(t_list **stack_a, t_list **stack_b)
 			i[0] = -1;
 			while (++i[0] < n[1])
 				(write(1, "rb\n", 3), rotate(stack_b));
+			//ft_printf("################################\n");
 		}
 		else if (best_cost == n[0] + b_size - n[1])
 		{
@@ -119,6 +120,7 @@ void	push_to_b(t_list **stack_a, t_list **stack_b)
 			i[0] = -1;
 			while (++i[0] < n[0])
 				(write(1, "ra\n", 3), rotate(stack_a));
+			//ft_printf("********************************\n");
 		}
 		(write(1, "pb\n", 3), push(stack_b, stack_a));
 		a_size = ft_lstsize(*stack_a);
@@ -128,42 +130,37 @@ void	push_to_b(t_list **stack_a, t_list **stack_b)
 
 void	push_to_a(t_list **stack_a, t_list **stack_b)
 {
-	int	n[2];
+	int	n;
 	
-	push_efficiently(stack_a, stack_b, n);
-	if (n[0] == 0 && n[1] == INT_MAX)
-		(order_stack(stack_a), write(1, "pa\n", 3), push(stack_a, stack_b));
-	else if (n[0] <= ft_lstsize(*stack_a) / 2)
+	n = push_efficiently(stack_a, stack_b);
+	if (n <= ft_lstsize(*stack_a) / 2)
 	{
-		while (n[0]-- > 0)
+		while (n-- > 0)
 			(rotate(stack_a), write(1, "ra\n", 3));
-		(write(1, "pa\n", 3), push(stack_a, stack_b));
 	}
-	else if (n[0] < ft_lstsize(*stack_a))
+	else
 	{
-		while (n[0]++ < ft_lstsize(*stack_a))
+		while (n++ < ft_lstsize(*stack_a))
 			(reverse_rotate(stack_a), write(1, "rra\n", 4));
-		(write(1, "pa\n", 3), push(stack_a, stack_b));
 	}
+	(write(1, "pa\n", 3), push(stack_a, stack_b));
 }
 
-void	push_efficiently(t_list **stack_a, t_list **stack_b, int n[2])
+int	push_efficiently(t_list **stack_a, t_list **stack_b)
 {
-	int	i[2];
-	int	diff;
+	int	i;
+	int	a_size;
 	
-	i[0] = -1;
-	(void) i[1];
-	n[0] = 0;
-	n[1] = INT_MAX;
-	while (++i[0] < ft_lstsize(*stack_a))
+	i = -1;
+	a_size = ft_lstsize(*stack_a);
+	while (++i < a_size)
 	{
-		diff = *(int *)(*stack_a)->content - *(int *)(*stack_b)->content;
-		if (diff < n[1] && diff > 0)
-		{
-			n[1] = diff;
-			n[0] = i[0];
-		}
+		//diff = *(int *)(*stack_a)->content - *(int *)(*stack_b)->content;
+		//ft_printf("###################%d\n", best_friend_to_a(*stack_b, *stack_a));
+		if (best_friend_to_a(*stack_b, *stack_a))
+			return (i);
 		rotate(stack_a);
 	}
+	//ft_printf("#################");
+	return (0);
 }

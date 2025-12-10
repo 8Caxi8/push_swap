@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   push_swap_helper.c                                 :+:      :+:    :+:   */
@@ -6,11 +6,12 @@
 /*   By: dansimoe <dansimoe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 21:24:04 by dansimoe          #+#    #+#             */
-/*   Updated: 2025/12/09 21:47:08 by dansimoe         ###   ########.fr       */
+/*   Updated: 2025/12/10 19:39:48 by dansimoe         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 int	is_ascending(t_list *stack_a)
 {
@@ -50,6 +51,8 @@ void	order_stack(t_list **stack_a)
 	{
 		rotate(stack_a);
 		n++;
+		if (n == ft_lstsize(*stack_a))
+			exit(1);
 	}
 	if (n <= ft_lstsize(*stack_a) / 2)
 		while (n-- > 0)
@@ -70,25 +73,74 @@ void	start_algorithm(t_list **stack_a, t_list **stack_b)
 	lstprint(*stack_a, *stack_b); */
 	while (ft_lstsize(*stack_b) > 0)
 		push_to_a(stack_a, stack_b);
+	/* ft_printf("------STEP 3--------\n");
+	lstprint(*stack_a, *stack_b); */
 	if (is_ascending(*stack_a) != ft_lstsize(*stack_a) - 1)
 		order_stack(stack_a);
 }
-
-int	best_friend(t_list *node,t_list *stack)
+/* int	best_friend_to_b(t_list *node,t_list *stack)
 {
 	int	diff;
 	
 	if(!stack)
 		return (1);
-	diff = (*(int *)node->content - *(int *)stack->content);
-	if (diff < 0)
+	diff = ft_abs(*(int *)node->content - *(int *)stack->content);
+	if (node_is_min(node, stack) && node_is_max(stack, stack))
+		return (1);
+	if (*(int *)node->content < *(int *)stack->content)
 		return (0);
 	stack = stack->next;
 	while (stack)
 	{
-		if (diff > ((*(int *)node->content - *(int *)stack->content)) && 
-			0 < (*(int *)node->content - *(int *)stack->content))
+		if (diff > ft_abs(*(int *)node->content - *(int *)stack->content) &&
+			*(int *)node->content > *(int *)stack->content)
 			return (0);
+		stack=stack->next;
+	}
+	return (1);
+} */
+
+int	best_friend_to_b(t_list *node,t_list *stack)
+{
+	long	diff;
+	
+	if(!stack)
+		return (1);
+	diff = *(int *)node->content - *(int *)stack->content;
+	if (node_is_min(node, stack) && node_is_max(stack, stack))
+		return (1);
+	if (*(int *)node->content - *(int *)stack->content < 0)
+		return (0);
+	stack = stack->next;
+	while (stack)
+	{
+		if (diff > (*(int *)node->content - *(int *)stack->content) &&
+			*(int *)node->content - *(int *)stack->content > 0)
+			return (0);
+		stack=stack->next;
+	}
+	return (1);
+}
+
+int	best_friend_to_a(t_list *node,t_list *stack)
+{
+	if(!stack)
+		return (1);
+	intmax_t diff = (intmax_t)(*(int *)node->content) - (intmax_t)(*(int *)stack->content);
+	printf("Node = %d, stack = %d, diff = %zu\n", *(int *)node->content, *(int *)stack->content, diff);
+	if (node_is_max(node, stack) && node_is_min(stack, stack))
+		return (1);
+	if (*(int *)node->content - *(int *)stack->content > 0)
+		return (0);
+	stack = stack->next;
+	while (stack)
+	{
+		if (diff > (*(int *)node->content - *(int *)stack->content) &&
+			*(int *)node->content - *(int *)stack->content > 0)
+			{
+				//ft_printf("Node = %d, stack = %d, diff = %d\n", *(int *)node->content, *(int *)stack->content, diff);
+			return (0);
+			}
 		stack=stack->next;
 	}
 	return (1);
