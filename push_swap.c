@@ -6,7 +6,7 @@
 /*   By: dansimoe <dansimoe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 13:27:14 by dansimoe          #+#    #+#             */
-/*   Updated: 2025/12/10 12:33:17 by dansimoe         ###   ########.fr       */
+/*   Updated: 2025/12/11 03:58:56 by dansimoe         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -21,12 +21,40 @@ void	clear(t_list *stack_a, t_list *stack_b, long **n)
 	free(n);
 }
 
+int	greater_than(t_list *node, t_list *stack)
+{
+	int		n;
+
+	n = 0;
+	while (stack)
+	{
+		if (*(int *)node->content < *(int *)stack->content)
+			n++;
+		stack = stack->next;
+	}
+	return (n);
+}
+
+int	smaller_than(t_list *node, t_list *stack)
+{
+	int		n;
+
+	n = 0;
+	while (stack)
+	{
+		if (*(int *)node->content > *(int *)stack->content)
+			n++;
+		stack = stack->next;
+	}
+	return (n);
+}
+
 t_list	*get_stack(char **tab, long **n)
 {
 	int		i;
 	int		j;
 	t_list	*stack_a;
-	
+		
 	i = -1;
 	stack_a = NULL;
 	while(tab[++i])
@@ -44,7 +72,7 @@ t_list	*get_stack(char **tab, long **n)
 		}
 		ft_lstadd_back(&stack_a, ft_lstnew(n[i]));
 	}
-	return(stack_a);
+	return (stack_a);
 }
 
 void	lstprint(t_list	*stack_a, t_list	*stack_b)
@@ -91,25 +119,19 @@ int main(int ac, char **av)
 			free(str[i]);
 		free(str);
 		stack_b = NULL;
-		/* ft_printf("-----STEP 0--------\n");
-		lstprint(stack_a, stack_b); */
 		if (is_ascending(stack_a) != ft_lstsize(stack_a) - 1)
 			start_algorithm(&stack_a, &stack_b);
-		/* ft_printf("------STEP FINAL--------\n");
-		lstprint(stack_a, stack_b); */
 		clear(stack_a, stack_b, n);
 	}
 	else if (ac > 2)
 	{	
 		n = malloc((ac - 1) * sizeof(long *));
 		stack_a = get_stack(av + 1, n);
+		/* ft_printf("------STEP 1--------\n");
+		lstprint(stack_a, NULL); */
 		stack_b = NULL;
-		/* ft_printf("\n------STEP 0--------\n");
-		lstprint(stack_a, stack_b); */
 		if (is_ascending(stack_a) != ft_lstsize(stack_a) - 1)
 			start_algorithm(&stack_a, &stack_b);
-		/* ft_printf("\n------STEP FINAL--------\n");
-		lstprint(stack_a, stack_b); */
 		clear(stack_a, stack_b, n);
 	}
 	return (0);

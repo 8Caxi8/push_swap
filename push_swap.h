@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: dansimoe <dansimoe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 13:37:26 by dansimoe          #+#    #+#             */
-/*   Updated: 2025/12/10 16:24:09 by dansimoe         ###   ########.fr       */
+/*   Updated: 2025/12/11 00:49:15 by dansimoe         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
@@ -33,5 +33,7 @@ int		node_is_max(t_list *node,t_list *stack);
 int		node_is_min(t_list *node,t_list *stack);
 int		best_friend_to_b(t_list *node,t_list *stack);
 int		best_friend_to_a(t_list *node,t_list *stack);
+int		smaller_than(t_list *node, t_list *stack);
+int		greater_than(t_list *node, t_list *stack);
 
 #endif
