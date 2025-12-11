@@ -1,6 +1,7 @@
 NAME = push_swap
 
-SRCS =	push_swap.c push_swap_helper.c operations.c push_functions.c
+SRCS =	push_swap.c push_swap_helper.c operations.c push_functions.c \
+		rotations.c best_cost.c
 		
 BONUS =	
 
